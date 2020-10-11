@@ -7,25 +7,15 @@ import {
   Visibility,
 } from "semantic-ui-react";
 import PropTypes from "prop-types";
-import { createMedia } from "@artsy/fresnel";
-import HeaderSection from "../sections/HeaderSection";
-
-const { Media } = createMedia({
-  breakpoints: {
-    mobile: 0,
-    tablet: 768,
-    computer: 1024,
-  },
-});
+import { Link } from "react-router-dom";
 
 const DesktopContainer = ({ children }) => {
   const [fixed, setFixed] = useState(false);
 
   const hideFixedMenu = () => setFixed(false);
   const showFixedMenu = () => setFixed(true);
-
   return (
-    <Media greaterThan="mobile">
+    <>
       <Visibility
         once={false}
         onBottomPassed={showFixedMenu}
@@ -34,7 +24,7 @@ const DesktopContainer = ({ children }) => {
         <Segment
           inverted
           textAlign="center"
-          style={{ minHeight: 700, padding: "1em 0em" }}
+          style={{ minHeight: 80, padding: "1em 0em" }}
           vertical
         >
           <Menu
@@ -46,9 +36,11 @@ const DesktopContainer = ({ children }) => {
           >
             <Container>
               <Menu.Item as="a" active>
-                Home
+                <Link to="/">Home</Link>
               </Menu.Item>
-              <Menu.Item as="a">Work</Menu.Item>
+              <Menu.Item as="a">
+                <Link to="/about">About</Link>
+              </Menu.Item>
               <Menu.Item as="a">Company</Menu.Item>
               <Menu.Item as="a">Careers</Menu.Item>
               <Menu.Item position="right">
@@ -66,17 +58,16 @@ const DesktopContainer = ({ children }) => {
               </Menu.Item>
             </Container>
           </Menu>
-          <HeaderSection />
         </Segment>
       </Visibility>
 
       {children}
-    </Media>
+    </>
   );
 };
 
 DesktopContainer.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default DesktopContainer;

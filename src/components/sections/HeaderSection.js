@@ -36,4 +36,8 @@ HeaderSection.propTypes = {
   mobile: PropTypes.bool,
 };
 
+HeaderSection.defaultProps = {
+  mobile: false,
+};
+
 export default HeaderSection;
