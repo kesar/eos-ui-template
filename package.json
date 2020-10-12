@@ -15,6 +15,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.0",
     "styled-components": "4.4.1",
+    "ual-anchor": "^0.5.1",
     "ual-reactjs-renderer": "^0.3.1",
     "ual-scatter": "^0.3.0",
     "ual-token-pocket": "^0.3.0"

@@ -9,14 +9,23 @@ import {
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { UALContext } from "ual-reactjs-renderer";
+import styled from "styled-components";
+
+const SegmentWrapper = styled(Segment)`
+  min-height: 80px;
+  padding: "1em 0em";
+`;
 
 const DesktopContainer = ({ children }) => {
   const authContext = useContext(UALContext);
-  console.log(authContext);
   const [fixed, setFixed] = useState(false);
+  const [activeItem, setActiveItem] = useState("home");
 
   const hideFixedMenu = () => setFixed(false);
   const showFixedMenu = () => setFixed(true);
+
+  const handleItemClick = (e, { name }) => setActiveItem(name);
+
   return (
     <>
       <Visibility
@@ -24,12 +33,7 @@ const DesktopContainer = ({ children }) => {
         onBottomPassed={showFixedMenu}
         onBottomPassedReverse={hideFixedMenu}
       >
-        <Segment
-          inverted
-          textAlign="center"
-          style={{ minHeight: 80, padding: "1em 0em" }}
-          vertical
-        >
+        <SegmentWrapper inverted textAlign="center" vertical>
           <Menu
             fixed={fixed ? "top" : null}
             inverted={!fixed}
@@ -38,10 +42,22 @@ const DesktopContainer = ({ children }) => {
             size="large"
           >
             <Container>
-              <Menu.Item as={Link} to="/" active>
+              <Menu.Item
+                name="home"
+                as={Link}
+                to="/"
+                active={activeItem === "home"}
+                onClick={handleItemClick}
+              >
                 Home
               </Menu.Item>
-              <Menu.Item as={Link} to="/about">
+              <Menu.Item
+                name="about"
+                as={Link}
+                to="/about"
+                active={activeItem === "about"}
+                onClick={handleItemClick}
+              >
                 About
               </Menu.Item>
               <Menu.Item position="right">
@@ -61,7 +77,7 @@ const DesktopContainer = ({ children }) => {
               </Menu.Item>
             </Container>
           </Menu>
-        </Segment>
+        </SegmentWrapper>
       </Visibility>
 
       {children}
