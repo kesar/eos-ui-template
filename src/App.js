@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { withUAL } from "ual-reactjs-renderer";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import Layout from "./components/layouts/Layout";
 import HomePage from "./pages/HomePage";
@@ -10,13 +9,11 @@ function App() {
   return (
     <BrowserRouter>
       <Layout>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/about" component={AboutPage} />
-        </Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/about" component={AboutPage} />
       </Layout>
     </BrowserRouter>
   );
 }
 
-export default withUAL(App);
+export default App;

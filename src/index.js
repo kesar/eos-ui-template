@@ -1,37 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-// UAL Required Imports
 import { UALProvider } from "ual-reactjs-renderer";
-// Authenticator Imports
-import { Scatter } from "ual-scatter";
-import { TokenPocket } from "ual-token-pocket";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import "semantic-ui-css/semantic.min.css";
-
-const appName = process.env.REACT_APP_APP_NAME;
-
-// Chain
-const chain = {
-  chainId: process.env.REACT_APP_CHAIN_ID,
-  rpcEndpoints: [
-    {
-      protocol: process.env.REACT_APP_RPC_PROTOCOL,
-      host: process.env.REACT_APP_RPC_HOST,
-      port: process.env.REACT_APP_RPC_PORT,
-    },
-  ],
-};
-
-// Authenticators
-const scatter = new Scatter([chain], { appName });
-const tokenPocket = new TokenPocket([chain]);
-
-const supportedChains = [chain];
-const supportedAuthenticators = [scatter, tokenPocket];
+import {
+  appName,
+  supportedChains,
+  supportedAuthenticators,
+} from "./utils/UalProvider";
 
 ReactDOM.render(
   <React.StrictMode>

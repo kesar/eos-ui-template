@@ -8,12 +8,10 @@ import {
   Image,
   Segment,
 } from "semantic-ui-react";
-import HeaderSection from "../components/sections/HeaderSection";
 
 const HomePage = () => {
   return (
     <>
-      <HeaderSection mobile />
       <Segment style={{ padding: "8em 0em" }} vertical>
         <Grid container stackable verticalAlign="middle">
           <Grid.Row>
@@ -39,7 +37,7 @@ const HomePage = () => {
                 bordered
                 rounded
                 size="large"
-                src="/images/wireframe/white-image.png"
+                src="https://placeimg.com/640/480/animals"
               />
             </Grid.Column>
           </Grid.Row>
@@ -117,4 +115,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default React.memo(HomePage);

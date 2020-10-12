@@ -1,18 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { createMedia } from "@artsy/fresnel";
 import { Sidebar } from "semantic-ui-react";
 import MobileContainer from "./MobileContainer";
 import DesktopContainer from "./DesktopContainer";
-import FooterSection from "../sections/FooterSection";
+import FooterSection from "./FooterSection";
 
-const { MediaContextProvider, Media } = createMedia({
-  breakpoints: {
-    mobile: 0,
-    tablet: 768,
-    computer: 1024,
-  },
-});
+import { MediaContextProvider, Media } from "./Media";
 
 const Layout = ({ children }) => (
   <MediaContextProvider>
