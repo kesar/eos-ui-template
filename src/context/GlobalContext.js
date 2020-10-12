@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import PropTypes from "prop-types";
 
-export const GlobalContext = React.createContext({
-  isAuth: false,
-  login: () => {},
-});
+const globalReducer = (_, isGlobal) => (isGlobal ? {} : {});
+const initialState = JSON.parse(localStorage.getItem("GlobalState")) || {};
+export const GlobalContext = React.createContext(initialState);
 
 const GlobalContextProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [global, dispatch] = useReducer(globalReducer, initialState);
 
-  const loginHandler = () => {
-    setIsAuthenticated(true);
-  };
+  useEffect(() => {
+    localStorage.setItem("GlobalState", JSON.stringify(global));
+  }, [global]);
+
   return (
-    <GlobalContext.Provider
-      value={{ login: loginHandler, isAuth: isAuthenticated }}
-    >
+    <GlobalContext.Provider value={{ global, dispatch }}>
       {children}
     </GlobalContext.Provider>
   );
