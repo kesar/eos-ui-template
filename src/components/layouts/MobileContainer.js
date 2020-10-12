@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Container,
@@ -7,20 +7,19 @@ import {
   Segment,
   Sidebar,
 } from "semantic-ui-react";
-import PropTypes, { oneOfType, shape, instanceOf, func } from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { withUAL } from "ual-reactjs-renderer";
-import { ScatterUser } from "ual-scatter";
-import { TokenPocketUser } from "ual-token-pocket";
+import { UALContext } from "ual-reactjs-renderer";
 import styled from "styled-components";
 
 const SegmentWrapper = styled(Segment)`
-  min-height: 50;
+  min-height: 50px;
   padding: "1em 0em";
 `;
 
-const MobileContainer = ({ children, ual }) => {
+const MobileContainer = ({ children }) => {
   const [sidebarOpened, setSidebarOpened] = useState(false);
+  const authContext = useContext(UALContext);
 
   const handleSidebarHide = () => setSidebarOpened(false);
   const handleToggle = () => setSidebarOpened(true);
@@ -35,24 +34,24 @@ const MobileContainer = ({ children, ual }) => {
         vertical
         visible={sidebarOpened}
       >
-        <Menu.Item as="span" active>
-          <Link to="/">Home</Link>
+        <Menu.Item as={Link} to="/" active>
+          Home
         </Menu.Item>
-        <Menu.Item as="span">
-          <Link to="/about">About</Link>
+        <Menu.Item as={Link} to="/about">
+          About
         </Menu.Item>
-        {ual.activeUser === null ? (
-          <Menu.Item as="a" onClick={ual.showModal}>
+        {authContext.activeUser === null ? (
+          <Menu.Item as="a" onClick={authContext.showModal}>
             Log in
           </Menu.Item>
         ) : (
-          <Menu.Item as="a" onClick={ual.logout}>
+          <Menu.Item as="a" onClick={authContext.logout}>
             Logout
           </Menu.Item>
         )}
 
-        {ual.activeUser !== null && (
-          <Menu.Item as="a" onClick={ual.logout}>
+        {authContext.activeUser !== null && (
+          <Menu.Item as="a" onClick={authContext.logout}>
             Logout
           </Menu.Item>
         )}
@@ -66,12 +65,12 @@ const MobileContainer = ({ children, ual }) => {
                 <Icon name="sidebar" />
               </Menu.Item>
               <Menu.Item position="right">
-                {ual.activeUser === null ? (
-                  <Button as="a" inverted onClick={ual.showModal}>
+                {authContext.activeUser === null ? (
+                  <Button as="a" inverted onClick={authContext.showModal}>
                     Log in
                   </Button>
                 ) : (
-                  <Button as="a" inverted onClick={ual.logout}>
+                  <Button as="a" inverted onClick={authContext.logout}>
                     Logout
                   </Button>
                 )}
@@ -87,22 +86,7 @@ const MobileContainer = ({ children, ual }) => {
 };
 
 MobileContainer.propTypes = {
-  ual: shape({
-    activeUser: oneOfType([
-      instanceOf(ScatterUser),
-      instanceOf(TokenPocketUser),
-    ]),
-    logout: func,
-    showModal: func.isRequired,
-  }),
   children: PropTypes.node.isRequired,
 };
 
-MobileContainer.defaultProps = {
-  ual: {
-    activeUser: null,
-    logout: () => {},
-  },
-};
-
-export default withUAL(MobileContainer);
+export default MobileContainer;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   Container,
@@ -6,13 +6,13 @@ import {
   Segment,
   Visibility,
 } from "semantic-ui-react";
-import PropTypes, { instanceOf, oneOfType, shape, func } from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { withUAL } from "ual-reactjs-renderer";
-import { ScatterUser } from "ual-scatter";
-import { TokenPocketUser } from "ual-token-pocket";
+import { UALContext } from "ual-reactjs-renderer";
 
-const DesktopContainer = ({ children, ual }) => {
+const DesktopContainer = ({ children }) => {
+  const authContext = useContext(UALContext);
+  console.log(authContext);
   const [fixed, setFixed] = useState(false);
 
   const hideFixedMenu = () => setFixed(false);
@@ -38,19 +38,23 @@ const DesktopContainer = ({ children, ual }) => {
             size="large"
           >
             <Container>
-              <Menu.Item as="span" active>
-                <Link to="/">Home</Link>
+              <Menu.Item as={Link} to="/" active>
+                Home
               </Menu.Item>
-              <Menu.Item as="span">
-                <Link to="/about">About</Link>
+              <Menu.Item as={Link} to="/about">
+                About
               </Menu.Item>
               <Menu.Item position="right">
-                {ual.activeUser === null ? (
-                  <Button as="a" inverted={!fixed} onClick={ual.showModal}>
+                {authContext.activeUser === null ? (
+                  <Button
+                    as="a"
+                    inverted={!fixed}
+                    onClick={authContext.showModal}
+                  >
                     Log in
                   </Button>
                 ) : (
-                  <Button as="a" inverted={!fixed} onClick={ual.logout}>
+                  <Button as="a" inverted={!fixed} onClick={authContext.logout}>
                     Logout
                   </Button>
                 )}
@@ -66,22 +70,7 @@ const DesktopContainer = ({ children, ual }) => {
 };
 
 DesktopContainer.propTypes = {
-  ual: shape({
-    activeUser: oneOfType([
-      instanceOf(ScatterUser),
-      instanceOf(TokenPocketUser),
-    ]),
-    logout: func,
-    showModal: func.isRequired,
-  }),
   children: PropTypes.node.isRequired,
 };
 
-DesktopContainer.defaultProps = {
-  ual: {
-    activeUser: null,
-    logout: () => {},
-  },
-};
-
-export default withUAL(DesktopContainer);
+export default DesktopContainer;

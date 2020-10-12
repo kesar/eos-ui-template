@@ -12,15 +12,19 @@ import {
   supportedAuthenticators,
 } from "./utils/UalProvider";
 
+import GlobalContextProvider from "./context/GlobalContext";
+
 ReactDOM.render(
   <React.StrictMode>
-    <UALProvider
-      chains={supportedChains}
-      authenticators={supportedAuthenticators}
-      appName={appName}
-    >
-      <App />
-    </UALProvider>
+    <GlobalContextProvider>
+      <UALProvider
+        chains={supportedChains}
+        authenticators={supportedAuthenticators}
+        appName={appName}
+      >
+        <App />
+      </UALProvider>
+    </GlobalContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
