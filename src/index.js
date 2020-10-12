@@ -5,7 +5,8 @@ import { UALProvider } from "ual-reactjs-renderer";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import "semantic-ui-css/semantic.min.css";
+import "semantic-ui-less/semantic.less";
+
 import {
   appName,
   supportedChains,
