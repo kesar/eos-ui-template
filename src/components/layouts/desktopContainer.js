@@ -7,7 +7,7 @@ import {
   Visibility,
 } from "semantic-ui-react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UALContext } from "ual-reactjs-renderer";
 import styled from "styled-components";
 
@@ -17,9 +17,10 @@ const SegmentWrapper = styled(Segment)`
 `;
 
 const DesktopContainer = ({ children }) => {
+  const location = useLocation();
   const authContext = useContext(UALContext);
   const [fixed, setFixed] = useState(false);
-  const [activeItem, setActiveItem] = useState("/");
+  const [activeItem, setActiveItem] = useState(location.pathname);
 
   const hideFixedMenu = () => setFixed(false);
   const showFixedMenu = () => setFixed(true);

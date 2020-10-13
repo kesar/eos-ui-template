@@ -1,18 +1,39 @@
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Layout from "./components/layouts/Layout";
-import HomePage from "./pages/HomePage";
-import TransferPage from "./pages/TransferPage";
+import { UALProvider } from "ual-reactjs-renderer";
+import {
+  appName,
+  supportedAuthenticators,
+  supportedChains,
+} from "./utils/UalProvider";
+
+import Error from "./features/error";
+import Loading from "./features/loading";
+import ErrorBoundary from "./components/errorBoundary";
+
+const HomePage = lazy(() => import("./features/home"));
+const TransferPage = lazy(() => import("./features/transfer"));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/transfer" component={TransferPage} />
-      </Layout>
-    </BrowserRouter>
+    <ErrorBoundary fallback={<Error />}>
+      <Suspense fallback={<Loading />}>
+        <UALProvider
+          chains={supportedChains}
+          authenticators={supportedAuthenticators}
+          appName={appName}
+        >
+          <Router>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/transfer" component={TransferPage} />
+              <Route path="*">Not Found</Route>
+            </Switch>
+          </Router>
+        </UALProvider>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 
