@@ -19,12 +19,12 @@ const SegmentWrapper = styled(Segment)`
 const DesktopContainer = ({ children }) => {
   const authContext = useContext(UALContext);
   const [fixed, setFixed] = useState(false);
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("/");
 
   const hideFixedMenu = () => setFixed(false);
   const showFixedMenu = () => setFixed(true);
 
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+  const handleItemClick = (e, { to }) => setActiveItem(to);
 
   return (
     <>
@@ -43,22 +43,20 @@ const DesktopContainer = ({ children }) => {
           >
             <Container>
               <Menu.Item
-                name="home"
                 as={Link}
                 to="/"
-                active={activeItem === "home"}
+                active={activeItem === "/"}
                 onClick={handleItemClick}
               >
                 Home
               </Menu.Item>
               <Menu.Item
-                name="about"
                 as={Link}
-                to="/about"
-                active={activeItem === "about"}
+                to="/transfer"
+                active={activeItem === "/transfer"}
                 onClick={handleItemClick}
               >
-                About
+                Transfer
               </Menu.Item>
               <Menu.Item position="right">
                 {authContext.activeUser === null ? (

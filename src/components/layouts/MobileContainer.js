@@ -19,13 +19,13 @@ const SegmentWrapper = styled(Segment)`
 
 const MobileContainer = ({ children }) => {
   const [sidebarOpened, setSidebarOpened] = useState(false);
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState("/");
   const authContext = useContext(UALContext);
 
   const handleSidebarHide = () => setSidebarOpened(false);
   const handleToggle = () => setSidebarOpened(true);
 
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+  const handleItemClick = (e, { to }) => setActiveItem(to);
 
   return (
     <Sidebar.Pushable>
@@ -38,22 +38,20 @@ const MobileContainer = ({ children }) => {
         visible={sidebarOpened}
       >
         <Menu.Item
-          name="home"
           as={Link}
           to="/"
-          active={activeItem === "home"}
+          active={activeItem === "/"}
           onClick={handleItemClick}
         >
           Home
         </Menu.Item>
         <Menu.Item
-          name="about"
           as={Link}
-          to="/about"
-          active={activeItem === "about"}
+          to="/transfer"
+          active={activeItem === "transfer"}
           onClick={handleItemClick}
         >
-          About
+          Transfer
         </Menu.Item>
         {authContext.activeUser === null ? (
           <Menu.Item as="a" onClick={authContext.showModal}>
