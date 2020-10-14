@@ -10,6 +10,7 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 import { UALContext } from "ual-reactjs-renderer";
+import { toast } from "react-semantic-toasts";
 import Layout from "../components/layouts/layout";
 
 const Transfer = () => {
@@ -54,6 +55,13 @@ const Transfer = () => {
       setTxResponse({
         type: "error",
         message: error.message,
+      });
+
+      toast({
+        type: "error",
+        title: "Error",
+        time: 5000,
+        description: <p>{error.message}</p>,
       });
     }
   };

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Sidebar } from "semantic-ui-react";
+import { SemanticToastContainer } from "react-semantic-toasts";
 import MobileContainer from "./mobileContainer";
 import DesktopContainer from "./desktopContainer";
 import FooterSection from "./footerSection";
@@ -11,6 +12,7 @@ import { GlobalStyle } from "../globalStyles";
 const Layout = ({ children }) => (
   <MediaContextProvider>
     <GlobalStyle />
+    <SemanticToastContainer position="bottom-right" />
     <Media greaterThan="mobile">
       <DesktopContainer>{children}</DesktopContainer>
     </Media>
