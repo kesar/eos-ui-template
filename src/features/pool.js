@@ -13,7 +13,7 @@ import { UALContext } from "ual-reactjs-renderer";
 import { toast } from "react-semantic-toasts";
 import Layout from "../components/layouts/layout";
 
-const Transfer = () => {
+const PoolPage = () => {
   const authContext = useContext(UALContext);
   const { control, handleSubmit } = useForm();
   const [txResponse, setTxResponse] = useState({
@@ -70,7 +70,7 @@ const Transfer = () => {
     <Layout>
       <Grid
         textAlign="center"
-        style={{ height: "100vh" }}
+        style={{ height: "80vh" }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -123,4 +123,4 @@ const Transfer = () => {
   );
 };
 
-export default React.memo(Transfer);
+export default React.memo(PoolPage);

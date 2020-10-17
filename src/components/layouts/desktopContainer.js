@@ -49,15 +49,15 @@ const DesktopContainer = ({ children }) => {
                 active={activeItem === "/"}
                 onClick={handleItemClick}
               >
-                Home
+                Swap
               </Menu.Item>
               <Menu.Item
                 as={Link}
-                to="/transfer"
-                active={activeItem === "/transfer"}
+                to="/pool"
+                active={activeItem === "/pool"}
                 onClick={handleItemClick}
               >
-                Transfer
+                Pool
               </Menu.Item>
               <Menu.Item position="right">
                 {authContext.activeUser === null ? (

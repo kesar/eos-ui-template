@@ -4,7 +4,6 @@ import { Sidebar } from "semantic-ui-react";
 import { SemanticToastContainer } from "react-semantic-toasts";
 import MobileContainer from "./mobileContainer";
 import DesktopContainer from "./desktopContainer";
-import FooterSection from "./footerSection";
 
 import { MediaContextProvider, Media } from "./media";
 import { GlobalStyle } from "../globalStyles";
@@ -19,7 +18,6 @@ const Layout = ({ children }) => (
     <Media as={Sidebar.Pushable} at="mobile">
       <MobileContainer>{children}</MobileContainer>
     </Media>
-    <FooterSection />
   </MediaContextProvider>
 );
 

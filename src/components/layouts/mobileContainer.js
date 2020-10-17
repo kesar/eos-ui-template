@@ -43,15 +43,15 @@ const MobileContainer = ({ children }) => {
           active={activeItem === "/"}
           onClick={handleItemClick}
         >
-          Home
+          Swap
         </Menu.Item>
         <Menu.Item
           as={Link}
-          to="/transfer"
-          active={activeItem === "transfer"}
+          to="/pool"
+          active={activeItem === "pool"}
           onClick={handleItemClick}
         >
-          Transfer
+          Pool
         </Menu.Item>
         {authContext.activeUser === null ? (
           <Menu.Item as="a" onClick={authContext.showModal}>

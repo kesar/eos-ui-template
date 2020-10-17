@@ -1,139 +1,120 @@
 import React from "react";
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Image,
-  Segment,
-} from "semantic-ui-react";
+import { Button, Form, Grid, Header, Icon, Segment } from "semantic-ui-react";
+import { Controller, useForm } from "react-hook-form";
 import Layout from "../components/layouts/layout";
-import { AppProvider, useAppDispatch, useAppState } from "../context";
+import styled from "styled-components";
 
-const ShowId = () => {
-  const { id } = useAppState();
+const SwapContainer = styled.div`
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  margin: 4px;
+  padding: 4px;
+  display: grid;
+`;
 
-  return <div>Id: {id}</div>;
-};
+const SwapTokenHeader = styled.div`
+  font-size: 14px;
+  float: left;
+  text-align: left;
+  color: rgb(86, 90, 105);
+  margin: 5px;
+  display: block;
+`;
 
-const ChangeId = () => {
-  const dispatch = useAppDispatch();
-  const handleClick = () => {
-    const id = Math.random().toString();
+const SwapTokenContainer = styled.div`
+  display: grid;
+  grid-template-columns: 65% 35%;
+`;
 
-    dispatch({ type: "SELECT_ID", payload: id });
-  };
+const SwapTokenInputContainer = styled.div``;
 
-  return (
-    <Button as="a" size="large" onClick={handleClick}>
-      I'm Still Quite Interested
-    </Button>
-  );
-};
+const SwapTokenInput = styled.input`
+  border: 0px !important;
+  padding: 5px !important;
+`;
+
+const SwapTokenListContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SwapTokenSelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00b5ad;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 1px;
+`;
+
+const SwapTokenIcon = styled.img`
+  width: 22px;
+`;
+
+const SwapTokenName = styled.span`
+  margin-left: 5px;
+  font-weight: 500;
+`;
+
+const ArrowWrapper = styled.div`
+  margin: 15px;
+  color: rgb(86, 90, 105);
+`;
 
 const Home = () => {
+  const { control, handleSubmit } = useForm();
+
   return (
     <Layout>
-      <AppProvider>
-        <Segment style={{ padding: "8em 0em" }} vertical>
-          <Grid container stackable verticalAlign="middle">
-            <Grid.Row>
-              <Grid.Column width={8}>
-                <Header as="h3" style={{ fontSize: "2em" }}>
-                  We Help Companies and Companions
-                </Header>
-                <p style={{ fontSize: "1.33em" }}>
-                  We can give your company superpowers to do things that they
-                  never thought possible. Let us delight your customers and
-                  empower your needs... through pure data analytics.
-                </p>
-                <Header as="h3" style={{ fontSize: "2em" }}>
-                  We Make Bananas That Can Dance
-                </Header>
-                <p style={{ fontSize: "1.33em" }}>
-                  Yes that's right, you thought it was the stuff of dreams, but
-                  even bananas can be bioengineered.
-                </p>
-              </Grid.Column>
-              <Grid.Column floated="right" width={6}>
-                <Image
-                  bordered
-                  rounded
-                  size="large"
-                  src="https://placeimg.com/640/480/animals"
-                />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <Button size="huge">Check Them Out</Button>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
+      <Grid
+        textAlign="center"
+        style={{ height: "80vh" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Form size="large">
+            <Segment stacked>
+              <SwapContainer>
+                <SwapTokenHeader>From</SwapTokenHeader>
+                <SwapTokenContainer>
+                  <SwapTokenInputContainer>
+                    <SwapTokenInput placeholder="0.0000" />
+                  </SwapTokenInputContainer>
+                  <SwapTokenListContainer>
+                    <SwapTokenIcon src="icon.png" />
+                    <SwapTokenName>ETH</SwapTokenName>
+                    <Icon name="angle down" size="small" />
+                  </SwapTokenListContainer>
+                </SwapTokenContainer>
+              </SwapContainer>
+              <ArrowWrapper>
+                <Icon name="arrow down" size="small" />
+              </ArrowWrapper>
+              <SwapContainer>
+                <SwapTokenHeader>To</SwapTokenHeader>
+                <SwapTokenContainer>
+                  <SwapTokenInputContainer>
+                    <SwapTokenInput placeholder="0.0000" />
+                  </SwapTokenInputContainer>
+                  <SwapTokenSelectContainer>
+                    <span>Select a token</span>
+                    <Icon name="angle down" size="small" />
+                  </SwapTokenSelectContainer>
+                </SwapTokenContainer>
+              </SwapContainer>
+              <br />
 
-        <Segment style={{ padding: "0em" }} vertical>
-          <Grid celled="internally" columns="equal" stackable>
-            <Grid.Row textAlign="center">
-              <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
-                <Header as="h3" style={{ fontSize: "2em" }}>
-                  "What a Company"
-                </Header>
-                <p style={{ fontSize: "1.33em" }}>
-                  That is what they all say about us
-                </p>
-              </Grid.Column>
-              <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
-                <Header as="h3" style={{ fontSize: "2em" }}>
-                  "I shouldn't have gone with their competitor."
-                </Header>
-                <p style={{ fontSize: "1.33em" }}>
-                  <b>Nan</b> Chief Fun Officer Acme Toys
-                </p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
-
-        <Segment style={{ padding: "8em 0em" }} vertical>
-          <Container text>
-            <Header as="h3" style={{ fontSize: "2em" }}>
-              Breaking The Grid, Grabs Your Attention
-            </Header>
-            <p style={{ fontSize: "1.33em" }}>
-              Instead of focusing on content creation and hard work, we have
-              learned how to master the art of doing nothing by providing
-              massive amounts of whitespace and generic content that can seem
-              massive, monolithic and worth your attention.
-            </p>
-            <Button as="a" size="large">
-              Read More
-            </Button>
-
-            <Divider
-              as="h4"
-              className="header"
-              horizontal
-              style={{ margin: "3em 0em", textTransform: "uppercase" }}
-            >
-              <button href="#">Case Studies</button>
-            </Divider>
-
-            <Header as="h3" style={{ fontSize: "2em" }}>
-              Did We Tell You About Our Bananas?
-            </Header>
-            <p style={{ fontSize: "1.33em" }}>
-              Yes I know you probably disregarded the earlier boasts as
-              non-sequitur filler content, but it's really true. It took years
-              of gene splicing and combinatory DNA research, but our bananas can
-              really dance.
-            </p>
-            <ShowId />
-            <ChangeId />
-          </Container>
-        </Segment>
-      </AppProvider>
+              <Button color="teal" fluid size="large">
+                Swap
+              </Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
     </Layout>
   );
 };

@@ -13,7 +13,7 @@ import Loading from "./features/loading";
 import ErrorBoundary from "./components/errorBoundary";
 
 const HomePage = lazy(() => import("./features/home"));
-const TransferPage = lazy(() => import("./features/transfer"));
+const PoolPage = lazy(() => import("./features/pool"));
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/transfer" component={TransferPage} />
+              <Route path="/pool" component={PoolPage} />
               <Route path="*">Not Found</Route>
             </Switch>
           </Router>
