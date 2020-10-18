@@ -1,25 +1,36 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Sidebar } from "semantic-ui-react";
-import { SemanticToastContainer } from "react-semantic-toasts";
-import MobileContainer from "./mobileContainer";
-import DesktopContainer from "./desktopContainer";
-
-import { MediaContextProvider, Media } from "./media";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import { GlobalStyle } from "../globalStyles";
 
-const Layout = ({ children }) => (
-  <MediaContextProvider>
-    <GlobalStyle />
-    <SemanticToastContainer position="bottom-right" />
-    <Media greaterThan="mobile">
-      <DesktopContainer>{children}</DesktopContainer>
-    </Media>
-    <Media as={Sidebar.Pushable} at="mobile">
-      <MobileContainer>{children}</MobileContainer>
-    </Media>
-  </MediaContextProvider>
-);
+const Layout = ({ children }) => {
+  const location = useLocation();
+  return (
+    <Container fluid>
+      <GlobalStyle />
+      <Navbar expand="lg">
+        <Navbar.Brand as={Link} to="/">🧠</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link active={location.pathname === "/"} as={Link} to="/">
+              Swap
+            </Nav.Link>
+            <Nav.Link
+              active={location.pathname === "/pool"}
+              as={Link}
+              to="/pool"
+            >
+              Pool
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      {children}
+    </Container>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
