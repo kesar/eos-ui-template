@@ -1,16 +1,20 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Button, Container, Nav, Navbar, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
+import { UALContext } from "ual-reactjs-renderer";
 import { GlobalStyle } from "../globalStyles";
 
 const Layout = ({ children }) => {
   const location = useLocation();
+  const authContext = useContext(UALContext);
   return (
     <Container fluid>
       <GlobalStyle />
-      <Navbar expand="lg">
-        <Navbar.Brand as={Link} to="/">🧠</Navbar.Brand>
+      <Navbar expand="lg" className="p-3 font-weight-bold">
+        <Navbar.Brand as={Link} to="/">
+          🧠
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -25,6 +29,13 @@ const Layout = ({ children }) => {
               Pool
             </Nav.Link>
           </Nav>
+          <Form inline>
+            {authContext.activeUser === null ? (
+              <Button onClick={authContext.showModal}>Log in</Button>
+            ) : (
+              <Button onClick={authContext.logout}>Logout</Button>
+            )}
+          </Form>
         </Navbar.Collapse>
       </Navbar>
       {children}

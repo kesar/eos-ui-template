@@ -1,11 +1,14 @@
 import React from "react";
-import { GlobalStyle } from "../components/globalStyles";
+import { Col, Container, Row } from "react-bootstrap";
 
 const Loading = () => {
   return (
     <>
-      <GlobalStyle />
-      <p>Loading...</p>
+      <Container className="p-3 mt-5" fluid>
+        <Row>
+          <Col>Loading...</Col>
+        </Row>
+      </Container>
     </>
   );
 };

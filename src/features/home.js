@@ -60,7 +60,8 @@ const SwapTokenHeader = styled.div`
 
 const SwapTokenContainer = styled.div`
   display: grid;
-  grid-template-columns: 62% auto;
+  grid-template-columns: 60% auto;
+  justify-content: space-between;
 `;
 
 const SwapTokenInputContainer = styled.div``;
@@ -68,6 +69,10 @@ const SwapTokenInputContainer = styled.div``;
 const SwapTokenInput = styled(Form.Control)`
   border: 0px !important;
   padding: 5px !important;
+  font-size: 30px !important;
+  :focus {
+    box-shadow: none !important;
+  }
 `;
 
 const SwapTokenListButton = styled(Button)`
@@ -84,9 +89,10 @@ const SwapTokenSelectContainer = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1px !important;
-  padding: 1px !important;
   font-size: 12px !important;
+  border-radius: 15px;
+  margin: 0px !important;
+  padding: 10px !important;
   span {
     margin-right: 3px;
   }
@@ -112,28 +118,40 @@ const ArrowWrapper = styled.div`
 function alertClicked() {}
 
 const Home = () => {
-  const { control, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [modalShow, setModalShow] = React.useState(false);
 
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <Layout>
-      <Container className="p-3 mt-5" fluid>
+      <Container className="p-3 mt-3" fluid>
         <Row>
           <Col>
             <Title>🧠</Title>
-            <CardStyled className="mx-auto">
+            <CardStyled className="mx-auto shadow-sm">
               <Card.Body>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                   <SwapContainer>
                     <SwapTokenHeader>From</SwapTokenHeader>
                     <SwapTokenContainer>
                       <SwapTokenInputContainer>
-                        <SwapTokenInput placeholder="0.0000" />
+                        <SwapTokenInput
+                          name="fromAmount"
+                          placeholder="0.000"
+                          ref={register({ required: true })}
+                        />
                       </SwapTokenInputContainer>
                       <SwapTokenListButton onClick={() => setModalShow(true)}>
                         <SwapTokenIcon src="icon.png" />
-                        <SwapTokenName>YESTRUP</SwapTokenName>
+                        <SwapTokenName>IQ</SwapTokenName>
                         <ChevronDown color="black" />
+                        <Form.Control
+                          type="hidden"
+                          name="fromToken"
+                          ref={register({ required: true })}
+                        />
                       </SwapTokenListButton>
                     </SwapTokenContainer>
                   </SwapContainer>
@@ -144,7 +162,11 @@ const Home = () => {
                     <SwapTokenHeader>To</SwapTokenHeader>
                     <SwapTokenContainer>
                       <SwapTokenInputContainer>
-                        <SwapTokenInput placeholder="0.0000" />
+                        <SwapTokenInput
+                          name="toAmount"
+                          placeholder="0.0000"
+                          ref={register({ required: true })}
+                        />
                       </SwapTokenInputContainer>
                       <SwapTokenSelectContainer
                         variant="secondary"
@@ -152,17 +174,16 @@ const Home = () => {
                       >
                         <span>Select a token</span>
                         <ChevronDown />
+                        <Form.Control
+                          type="hidden"
+                          name="toToken"
+                          ref={register({ required: true })}
+                        />
                       </SwapTokenSelectContainer>
                     </SwapTokenContainer>
                   </SwapContainer>
                   <br />
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    size="lg"
-                    block
-                    onClick={alertClicked}
-                  >
+                  <Button variant="primary" type="submit" size="lg" block>
                     Swap
                   </Button>
                 </Form>
