@@ -13,7 +13,9 @@ const Layout = ({ children }) => {
       <GlobalStyle />
       <Navbar expand="lg" className="p-3 font-weight-bold">
         <Navbar.Brand as={Link} to="/">
-          🧠
+          <span title="mindswap" role="img" aria-label="brain">
+            🧠
+          </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
