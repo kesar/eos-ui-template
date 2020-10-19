@@ -27,7 +27,9 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/pool" component={PoolPage} />
+              <Route path="/pool" component={HomePage} />
+              <Route path="/rewards" component={HomePage} />
+              <Route path="/convert" component={HomePage} />
               <Route path="*">Not Found</Route>
             </Switch>
           </Router>

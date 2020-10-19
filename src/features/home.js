@@ -76,13 +76,15 @@ const SwapTokenInput = styled(Form.Control)`
 `;
 
 const SwapTokenListButton = styled(Button)`
-  display: flex;
+  display: flex !important;
   text-align: right !important;
   align-items: center;
   justify-content: center;
   background-color: white !important;
   border: 0px !important;
   width: fit-content;
+  height: 100%;
+  vertical-align: middle;
 `;
 
 const SwapTokenSelectContainer = styled(Button)`
@@ -132,7 +134,11 @@ const Home = () => {
       <Container className="p-3 mt-3" fluid>
         <Row>
           <Col>
-            <Title>🧠</Title>
+            <Title>
+              <span title="mindswap" className="brain">
+                🧠
+              </span>
+            </Title>
             <CardStyled className="mx-auto shadow-sm">
               <Card.Body>
                 <Form onSubmit={handleSubmit(onSubmit)}>
@@ -147,7 +153,7 @@ const Home = () => {
                         />
                       </SwapTokenInputContainer>
                       <SwapTokenListButton onClick={() => setModalShow(true)}>
-                        <SwapTokenIcon src="icon.png" />
+                        <SwapTokenIcon src="tokens/iq.png" />
                         <SwapTokenName>IQ</SwapTokenName>
                         <ChevronDown color="black" />
                         <Form.Control
@@ -217,14 +223,17 @@ function TokenListModal(props) {
       </Modal.Header>
       <Modal.Body>
         <ListGroup variant="flush">
-          <ListGroup.Item action onClick={alertClicked}>
-            <Basket /> IQ
+          <ListGroup.Item action onClick={alertClicked} disabled>
+            <SwapTokenIcon src="tokens/iq.png" /> IQ
           </ListGroup.Item>
           <ListGroup.Item action onClick={alertClicked}>
-            <Basket /> EOS
+            <SwapTokenIcon src="tokens/eos.png" /> EOS
           </ListGroup.Item>
           <ListGroup.Item action onClick={alertClicked}>
-            <Basket /> YTRUMP
+            <SwapTokenIcon src="tokens/yestrump.png" /> YETRUMP
+          </ListGroup.Item>
+          <ListGroup.Item action onClick={alertClicked}>
+            <SwapTokenIcon src="tokens/notrump.png" /> NOTRUMP
           </ListGroup.Item>
         </ListGroup>
       </Modal.Body>

@@ -28,6 +28,20 @@ const Layout = ({ children }) => {
             >
               Pool
             </Nav.Link>
+            <Nav.Link
+              active={location.pathname === "/rewards"}
+              as={Link}
+              to="/rewards"
+            >
+              Rewards
+            </Nav.Link>
+            <Nav.Link
+              active={location.pathname === "/convert"}
+              as={Link}
+              to="/convert"
+            >
+              Convert
+            </Nav.Link>
           </Nav>
           <Form inline>
             {authContext.activeUser === null ? (
