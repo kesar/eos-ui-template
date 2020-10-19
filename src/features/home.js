@@ -11,7 +11,7 @@ import {
   Modal,
   Row,
 } from "react-bootstrap";
-import { ArrowDownShort, Basket, ChevronDown } from "react-bootstrap-icons";
+import { ArrowDownShort, ChevronDown } from "react-bootstrap-icons";
 import Layout from "../components/layouts/layout";
 
 const Title = styled.div`
@@ -24,7 +24,7 @@ const CardStyled = styled(Card)`
 
 const StyledModal = styled(Modal)`
   div {
-    max-width: 450px;
+    max-width: 400px;
     border-radius: 15px;
     border-bottom: 0px;
   }

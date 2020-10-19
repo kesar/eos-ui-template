@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Button, Container, Nav, Navbar, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { UALContext } from "ual-reactjs-renderer";
-import { GlobalStyle } from "../globalStyles";
+import GlobalStyle from "../globalStyles";
 
 const Layout = ({ children }) => {
   const location = useLocation();
