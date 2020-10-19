@@ -36,6 +36,10 @@ const SwapTokenInput = styled(Form.Control)`
   :focus {
     box-shadow: none !important;
   }
+
+  @media (max-width: 768px) {
+    font-size: 25px !important;
+  }
 `;
 
 const SwapTokenListButton = styled(Button)`
@@ -71,10 +75,18 @@ const SwapTokenName = styled.span`
   color: black;
   margin-right: 5px;
   font-size: 25px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const SwapTokenIcon = styled.img`
   width: 30px;
+
+  @media (max-width: 768px) {
+    width: 20px;
+  }
 `;
 
 const SwapContainer = ({ token, header, setModalShow, setTokenSelect }) => {
