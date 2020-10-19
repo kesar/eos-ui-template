@@ -14,6 +14,8 @@ import ErrorBoundary from "./components/errorBoundary";
 
 const HomePage = lazy(() => import("./features/home"));
 const PoolPage = lazy(() => import("./features/pool"));
+const RewardsPage = lazy(() => import("./features/rewards"));
+const ConvertPage = lazy(() => import("./features/convert"));
 
 function App() {
   return (
@@ -27,9 +29,9 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/pool" component={HomePage} />
-              <Route path="/rewards" component={HomePage} />
-              <Route path="/convert" component={HomePage} />
+              <Route path="/pool" component={PoolPage} />
+              <Route path="/rewards" component={RewardsPage} />
+              <Route path="/convert" component={ConvertPage} />
               <Route path="*">Not Found</Route>
             </Switch>
           </Router>

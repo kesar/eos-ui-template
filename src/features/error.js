@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/layouts/layout";
 import { Col, Container, Row } from "react-bootstrap";
+import Layout from "../components/layouts/layout";
 
 const Error = () => {
   return (

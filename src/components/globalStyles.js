@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
   animation-iteration-count: 1;  /* 1 time */
   transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
   display: inline-block;
+  cursor: pointer;
 }
 
 @keyframes brain-animation {
