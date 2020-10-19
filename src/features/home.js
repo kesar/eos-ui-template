@@ -93,13 +93,15 @@ const SwapTokenSelectContainer = styled(Button)`
   border-radius: 15px;
   margin: 0px !important;
   padding: 10px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   span {
     margin-right: 3px;
   }
 `;
 
 const SwapTokenIcon = styled.img`
-  width: 20px;
+  width: 30px;
 `;
 
 const SwapTokenName = styled.span`
@@ -107,6 +109,7 @@ const SwapTokenName = styled.span`
   font-weight: 500;
   color: black;
   margin-right: 5px;
+  font-size: 25px;
 `;
 
 const ArrowWrapper = styled.div`
