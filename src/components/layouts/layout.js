@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const authContext = useContext(UALContext);
   return (
-    <Container fluid>
+    <Container className="container-sm">
       <GlobalStyle />
       <Navbar expand="lg" className="p-3 font-weight-bold">
         <Navbar.Brand as={Link} to="/">
