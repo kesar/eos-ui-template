@@ -89,8 +89,9 @@ const SwapTokenIcon = styled.img`
   }
 `;
 
-const SwapContainer = ({ token, header, setModalShow, setTokenSelect }) => {
+const SwapContainer = ({ initialToken, header, onSwapTokenClick }) => {
   const { register } = useFormContext();
+  const [token, setToken] = React.useState(initialToken);
   return (
     <SwapContainerWrapper>
       <SwapTokenHeader>{header}</SwapTokenHeader>
@@ -112,8 +113,7 @@ const SwapContainer = ({ token, header, setModalShow, setTokenSelect }) => {
         {token && (
           <SwapTokenListButton
             onClick={() => {
-              setTokenSelect(header === "From");
-              setModalShow(true);
+              onSwapTokenClick(setToken);
             }}
           >
             <SwapTokenIcon src={token.icon} />
@@ -125,8 +125,7 @@ const SwapContainer = ({ token, header, setModalShow, setTokenSelect }) => {
           <SwapTokenSelectContainer
             variant="secondary"
             onClick={() => {
-              setTokenSelect(header === "From");
-              setModalShow(true);
+              onSwapTokenClick(setToken);
             }}
           >
             <span>Select a token</span>
@@ -139,10 +138,9 @@ const SwapContainer = ({ token, header, setModalShow, setTokenSelect }) => {
 };
 
 SwapContainer.propTypes = {
-  token: PropTypes.any,
+  initialToken: PropTypes.any,
   header: PropTypes.string.isRequired,
-  setModalShow: PropTypes.func.isRequired,
-  setTokenSelect: PropTypes.func.isRequired,
+  onSwapTokenClick: PropTypes.func.isRequired,
 };
 
 export default SwapContainer;

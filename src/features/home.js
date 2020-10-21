@@ -29,25 +29,19 @@ const onSubmit = (data) => {
 const Home = () => {
   const methods = useForm();
   const [modalShow, setModalShow] = React.useState(false);
-  const [tokenSelectIsFrom, setTokenSelectFrom] = React.useState(true);
-  const [tokenFrom, setTokenFrom] = React.useState(tokenList[0]);
-  const [tokenTo, setTokenTo] = React.useState(null);
+  const [callBackSwap, setCallBackSwap] = React.useState(null);
 
+  const openSelect = (callback) => {
+    setModalShow(true);
+    setCallBackSwap({ func: callback });
+  };
   const selectToken = ({ name, icon, placeholder }) => {
     setModalShow(false);
-    if (tokenSelectIsFrom) {
-      setTokenFrom({
-        name,
-        icon,
-        placeholder,
-      });
-    } else {
-      setTokenTo({
-        name,
-        icon,
-        placeholder,
-      });
-    }
+    callBackSwap.func({
+      name,
+      icon,
+      placeholder,
+    });
   };
 
   return (
@@ -71,18 +65,17 @@ const Home = () => {
                   <Form onSubmit={methods.handleSubmit(onSubmit)}>
                     <SwapContainer
                       header="From"
-                      token={tokenFrom}
+                      initialToken={tokenList[0]}
                       setModalShow={setModalShow}
-                      setTokenSelect={setTokenSelectFrom}
+                      onSwapTokenClick={openSelect}
                     />
                     <ArrowWrapper>
                       <ArrowDownShort />
                     </ArrowWrapper>
                     <SwapContainer
                       header="To"
-                      token={tokenTo}
                       setModalShow={setModalShow}
-                      setTokenSelect={setTokenSelectFrom}
+                      onSwapTokenClick={openSelect}
                     />
                     <br />
                     <Button variant="primary" type="submit" size="lg" block>
@@ -96,9 +89,7 @@ const Home = () => {
         </Row>
 
         <TokenListModal
-          tokenFrom={tokenFrom}
-          tokenTo={tokenTo}
-          tokenSelect={tokenSelectIsFrom}
+          disabledTokens={[]} // TODO: get selected tokens from context
           onSelectToken={selectToken}
           show={modalShow}
           onHide={() => setModalShow(false)}

@@ -29,9 +29,8 @@ const StyledModal = styled(Modal)`
 
 const TokenListModal = ({
   onSelectToken,
-  tokenFrom,
-  tokenTo,
   tokenSelect,
+  disabledTokens,
   ...otherProps
 }) => {
   return (
@@ -51,6 +50,7 @@ const TokenListModal = ({
         <ListGroup variant="flush">
           {tokenList.map((token) => (
             <ListGroup.Item
+              key={token.name}
               action
               onClick={() => {
                 onSelectToken({
@@ -59,10 +59,7 @@ const TokenListModal = ({
                   placeholder: token.placeholder,
                 });
               }}
-              disabled={
-                (tokenFrom && tokenFrom.name === token.name) ||
-                (tokenTo && tokenTo.name === token.name)
-              }
+              disabled={disabledTokens.includes(token.name)}
             >
               <SwapTokenIcon src={token.icon} /> {token.name}
             </ListGroup.Item>
@@ -75,8 +72,7 @@ const TokenListModal = ({
 
 TokenListModal.propTypes = {
   onSelectToken: PropTypes.func.isRequired,
-  tokenFrom: PropTypes.any,
-  tokenTo: PropTypes.any,
+  disabledTokens: PropTypes.array,
 };
 
 export default TokenListModal;
